@@ -4,10 +4,15 @@ const app = require('./app');
 
 dotenv.config({ path: './config.env' });
 
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD,
+);
+
 // Connect to DB and start server
 const port = process.env.PORT || 3000;
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(DB)
   .then(() => {
     app.listen(port, () => {
       console.log(`App running on port ${port}...`);
