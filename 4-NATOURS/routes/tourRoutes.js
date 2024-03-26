@@ -1,9 +1,15 @@
 const express = require('express');
 const tourController = require('../controllers/tourController');
 const authController = require('../controllers/authController');
-const reviewController = require('../controllers/reviewController');
+
+const reviewRouter = require('./reviewRoutes');
 
 const router = express.Router();
+
+// POST tour/23456/reviews
+// GET tour/23456/reviews
+
+router.use('/:tourId/reviews', reviewRouter);
 
 router
   .route('/top-5-cheap')
@@ -24,19 +30,6 @@ router
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour,
-  );
-
-// NESTED ROUTES: clear relationship btw parent and child
-// POST tour/23456/reviews
-// GET tour/23456/reviews
-// GET tour/23456/reviews/444321
-
-router
-  .route('/:tourId/reviews')
-  .post(
-    authController.protect,
-    authController.restrictTo('user'),
-    reviewController.createReview,
   );
 
 module.exports = router;
