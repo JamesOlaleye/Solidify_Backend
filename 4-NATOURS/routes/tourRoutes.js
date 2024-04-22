@@ -29,6 +29,8 @@ router
 //1) /tours-within?distance=233&center=-40,45&unit=mi
 //1) /tours-within/233/center/-40,45/unit/mi  // cleaner & standard way than above query
 
+router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
+
 router
   .route('/')
   .get(tourController.getAllTours)
