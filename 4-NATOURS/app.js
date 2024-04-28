@@ -53,6 +53,8 @@ app.use(
           "'self'",
           'https://api.mapbox.com',
           'https://events.mapbox.com',
+          'ws:', // Allow WebSocket connections
+          'wss:', // Allow secure WebSocket connections
         ], // For Mapbox connections
         'worker-src': ["'self'", 'blob:'], // Allow blob URLs for Web Workers
       },
