@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+// const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -24,13 +25,16 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Enable CORS
+// app.use(cors()); // Allowing requests from all origins
+
 // Set security HTTP headers
 // app.use(helmet());
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        'default-src': ["'self'"],
+        'default-src': ["'self'", 'http://127.0.0.1:3000'],
         'script-src': [
           "'self'",
           "'unsafe-eval'",
@@ -55,6 +59,7 @@ app.use(
           'https://events.mapbox.com',
           'ws:', // Allow WebSocket connections
           'wss:', // Allow secure WebSocket connections
+          'http://127.0.0.1:3000', // Add your server URL here
         ], // For Mapbox connections
         'worker-src': ["'self'", 'blob:'], // Allow blob URLs for Web Workers
       },
