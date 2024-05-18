@@ -68,6 +68,7 @@ app.use(
           'http://127.0.0.1:3000', // Add your server URL here
         ], // For Mapbox connections
         'worker-src': ["'self'", 'blob:'], // Allow blob URLs for Web Workers
+        'frame-src': ["'self'", 'https://js.stripe.com'], // Allow Stripe
       },
     },
   }),
