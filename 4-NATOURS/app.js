@@ -35,13 +35,18 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        'default-src': ["'self'", 'http://127.0.0.1:3000'],
+        'default-src': [
+          "'self'",
+          'http://127.0.0.1:3000',
+          'https://js.stripe.com',
+        ],
         'script-src': [
           "'self'",
           "'unsafe-eval'",
           'https://api.mapbox.com',
           'https://cdnjs.cloudflare.com',
-        ], // Allow Mapbox and Axios CDN
+          'https://js.stripe.com',
+        ], // Allow Mapbox and Axios CDN, and Stripe
         'style-src': [
           "'self'",
           "'unsafe-inline'",
